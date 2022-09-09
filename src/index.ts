@@ -1,7 +1,7 @@
 import express, { json } from 'express';
 import cors from 'cors';
 import chalk from 'chalk';
-import './config/index.js';
+import './envConfig/envConfig.js';
 import { errorHandlingMiddleware } from "./middlewares/errorMiddleware.js"
 import "express-async-errors"
 
