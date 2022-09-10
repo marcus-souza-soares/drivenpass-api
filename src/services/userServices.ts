@@ -2,7 +2,11 @@ import * as userRepository from "../repositories/userRepository.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+<<<<<<< HEAD
 import { UserIsertData, User } from "../types/userTypes.js";
+=======
+import { user } from "../../types/userTypes.js";
+>>>>>>> f33364b444f389b85e8b0d61b4de72de0836a553
 
 
 dotenv.config();
@@ -34,8 +38,15 @@ export async function findUserByEmail(email: string){
     const user = await userRepository.findUserByEmail(email);
     return user;
 }
+<<<<<<< HEAD
 function buildToken(user: User){
     const jwtKey = process.env.SECRET_KEY;
     const config = { expiresIn: process.env.EXPIRES_TOKEN || "1h"}
     return jwt.sign({user}, jwtKey, config);
+=======
+function buildToken(user: user){
+    const jwtKey = process.env.SECRET_KEY;
+    const config = { expiresIn: process.env.EXPIRES_TOKEN || "1h"}
+    return jwt.sign(user, jwtKey, config);
+>>>>>>> f33364b444f389b85e8b0d61b4de72de0836a553
 }
