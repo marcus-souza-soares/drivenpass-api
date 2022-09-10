@@ -1,5 +1,6 @@
 import prisma from "../database/prismaClient.js";
 import {
+  CredentialArray,
   CredentialInsertData,
   CredentialPartial,
 } from "../types/credentialTypes.js";
@@ -9,14 +10,14 @@ export async function create(data: CredentialInsertData) {
 }
 
 export async function verifyIfExists(data: CredentialPartial) {
-  return await prisma.credentials.findUnique({
+  return await prisma.credentials.findFirst({
     where: {
       ...data,
     },
   });
 }
 
-export async function findManyByUserId(userId: number) {
+export async function findManyByUserId(userId: number){
   return prisma.credentials.findMany({
     where: {
       userId,
@@ -24,7 +25,7 @@ export async function findManyByUserId(userId: number) {
   });
 }
 
-export async function findUniqueById(userId: number, id: number) {
+export async function findUniqueById(id: number) {
   return prisma.credentials.findUnique({
     where: {
       id

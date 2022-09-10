@@ -1,9 +1,9 @@
 import express, { json } from 'express';
+import { errorHandlingMiddleware } from "./middlewares/errorMiddleware.js"
+import "express-async-errors";
 import cors from 'cors';
 import chalk from 'chalk';
 import dotenv from "dotenv"
-import { errorHandlingMiddleware } from "./middlewares/errorMiddleware.js"
-import "express-async-errors";
 
 import router from './routes/index.js';
 
