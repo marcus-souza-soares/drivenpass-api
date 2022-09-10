@@ -3,8 +3,9 @@ import * as credentialServices from "../services/credentialServices.js";
 import { CredentialArray } from "../types/credentialTypes.js"
 
 export async function createCredential(req: Request, res: Response) {
+  const userId = res.locals.user.id;
   const credential = req.body;
-  await credentialServices.createCredential(credential);
+  await credentialServices.createCredential(credential, userId);
   res.status(201).send("OK");
 }
 export async function getCredencialById(req: Request, res: Response){
@@ -12,9 +13,11 @@ export async function getCredencialById(req: Request, res: Response){
   const credentialId = Number(req.params.id);
   if(!credentialId || credentialId % 1 !== 0) return res.status(422).send("insira o id corretamente!");
   const credential = await credentialServices.findByCredentialId(userId, credentialId);
+  return credential;
 }
 
-export async function getCredencialsByUserId(req: Request, res: Response){
-  const { id } = res.locals.user;
-  const credentials: CredentialArray[] = await credentialServices.findByUserId(id);
+export async function getCredencials(req: Request, res: Response){
+  const userId = res.locals.user.id;
+  const credentials: CredentialArray = await credentialServices.findManyByUserId(userId);
+  return res.status(200).send(credentials);
 }
