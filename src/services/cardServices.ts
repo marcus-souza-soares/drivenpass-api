@@ -50,6 +50,7 @@ export async function getUniqueCard(userId: number, cardId: number) {
 export async function deleteCard(userId: number, cardId: number) {
   if (!cardId) throw { code: "Dimiss", message: "Parâmetro 'id' vazio!" };
   const card: Card = await cardRepository.getUniqueCard(cardId);
+  console.log(card)
   if (!card) throw { code: "NotFound", message: "Esse cartão não existe..." };
   if (userId !== card.userId)
     throw {

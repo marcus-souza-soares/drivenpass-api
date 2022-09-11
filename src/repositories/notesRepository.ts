@@ -1,4 +1,4 @@
-import prisma from "../database/prismaClient";
+import prisma from "../database/prismaClient.js";
 import { NoteInsertData, NotePartial } from "../types/noteTypes.js";
 
 export async function create(note: NoteInsertData) {
@@ -15,7 +15,7 @@ export async function verifyIfExists(data: NotePartial) {
   });
 }
 
-export async function getnotes(userId: number) {
+export async function getNotes(userId: number) {
   return await prisma.notes.findMany({
       where: { userId },
   });

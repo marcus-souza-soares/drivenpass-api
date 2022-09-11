@@ -18,7 +18,7 @@ export async function createCredential(
     userId,
     title,
   });
-  if (credentialFromDB.title === title)
+  if (credentialFromDB?.title === title)
     throw { code: "NotAllowed", message: "Credencial já cadastrada!" };
   await credentialRepository.create({
     username,

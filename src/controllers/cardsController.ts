@@ -28,4 +28,6 @@ export async function deleteCard(req: Request, res: Response) {
   const cardId = Number(req.params.id);
   if (!cardId || cardId % 1 !== 0)
     return res.status(422).send("insira o id corretamente!");
+  await cardService.deleteCard(userId, cardId)
+  res.sendStatus(200);
 }
