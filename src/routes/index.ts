@@ -6,11 +6,11 @@ import noteRouter from "./notesRouter.js";
 import wifiRouter from "./wifiRouter.js"
 
 const router = Router();
-router.use(userRouter);
-router.use(credentialRouter);
-router.use(cardRouter);
-router.use(noteRouter);
-router.use(wifiRouter);
+router.use("/", userRouter);
+router.use("/", credentialRouter);
+router.use("/", cardRouter);
+router.use("/", noteRouter);
+router.use("/", wifiRouter);
 
 export default router;
 
