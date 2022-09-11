@@ -47,7 +47,17 @@ export async function getUniqueCard(userId: number, cardId: number) {
   };
 }
 
-export async function deleteCard() {}
+export async function deleteCard(userId: number, cardId: number) {
+  if (!cardId) throw { code: "Dimiss", message: "Parâmetro 'id' vazio!" };
+  const card: Card = await cardRepository.getUniqueCard(cardId);
+  if (!card) throw { code: "NotFound", message: "Esse cartão não existe..." };
+  if (userId !== card.userId)
+    throw {
+      code: "NotAllowed",
+      message: "Você não tem permissão para deletar esse cartão!",
+    };
+  await cardRepository.deleteCard(cardId);
+}
 
 function encriptData(password: string, cvc: string): object {
   const cryptr = new Cryptr(process.env.SECRET_KEY);
