@@ -21,3 +21,11 @@ export async function getCredencials(req: Request, res: Response){
   const credentials: CredentialArray = await credentialServices.findManyByUserId(userId);
   return res.status(200).send(credentials);
 }
+
+export async function deleteCredential(req: Request, res: Response) {
+  const userId = res.locals.user.id;
+  const credentialId = Number(req.params.id);
+  if(!credentialId || credentialId % 1 !== 0) return res.status(422).send("insira o id corretamente!");
+  await credentialServices.deleteCredential(userId, credentialId);
+  res.sendStatus(200);
+}
